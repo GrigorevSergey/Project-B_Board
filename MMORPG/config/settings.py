@@ -136,3 +136,23 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_SIGNUP_REDIRECT_URL = "/accounts/profile"
+
+EMAIL_HOST_USER = "grigoryev0089@gmail.com"
+EMAIL_HOST_PASSWORD = "RedfklF_72"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = 'grigoryev0089@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+CELERY_BROKER_URL = 'redis://default:ZRx849h9WPnhLJds2mwiTmlSKuecMxXl@redis-16910.c81.us-east-1-2.ec2.cloud.redislabs.com:16910'
+CELERY_RESULT_BACKEND = 'redis://default:ZRx849h9WPnhLJds2mwiTmlSKuecMxXl@redis-16910.c81.us-east-1-2.ec2.cloud.redislabs.com:16910'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
