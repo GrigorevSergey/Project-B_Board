@@ -59,7 +59,7 @@ def auth_code(request):
         subject=f'MMORPG Billboard: подтверждение e-mail',
         message=f'Доброго дня, {request.user}! Для подтверждения регистрации, введите код {user.code} на '
                 f'странице регистрации\nhttp://127.0.0.1:8000/accounts/profile',
-        from_email='newsportal272@gmail.com',
+        from_email='grigoryev0089@gmail.com',
         recipient_list=[request.user.email, ],
     )
     return HttpResponseRedirect(reverse('account_profile'))

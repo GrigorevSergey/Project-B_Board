@@ -99,10 +99,7 @@ class Responses(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(Responses, self).get_context_data(**kwargs)
         global title
-        """
-        Далее в условии - если пользователь попал на страницу через ссылку из письма, в которой содержится
-        ID поста для фильтра - фильтр работает по этому ID
-        """
+
         if self.kwargs.get('pk') and Post.objects.filter(id=self.kwargs.get('pk')).exists():
             title = str(Post.objects.get(id=self.kwargs.get('pk')).title)
             print(title)
@@ -113,17 +110,15 @@ class Responses(LoginRequiredMixin, ListView):
             context['filter_responses'] = list(Response.objects.filter(post_id=post_id).order_by('-dateCreation'))
             context['response_post_id'] = post_id.id
         else:
-            context['filter_responses'] = list(Response.objects.filter(post_id__author_id=self.request.user).order_by('-dateCreation'))
+            context['filter_responses'] = list(
+                Response.objects.filter(post_id__author_id=self.request.user).order_by('-dateCreation'))
         context['myresponses'] = list(Response.objects.filter(author_id=self.request.user).order_by('-dateCreation'))
         return context
 
     def post(self, request, *args, **kwargs):
         global title
         title = self.request.POST.get('title')
-        """
-        Далее в условии - При событии POST (если в пути открытой страницы есть ID) - нужно перезайти уже без этого ID
-        чтобы фильтр отрабатывал запрос уже из формы, так как ID, если он есть - приоритетный 
-        """
+
         if self.kwargs.get('pk'):
             return HttpResponseRedirect('/responses')
         return self.get(request, *args, **kwargs)

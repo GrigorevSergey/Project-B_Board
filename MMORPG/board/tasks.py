@@ -13,7 +13,7 @@ def respond_send_email(respond_id):
         subject=f'MMORPG Billboard: новый отклик на объявление!',
         message=f'Доброго дня, {respond.post.author}, ! На ваше объявление есть новый отклик!\n'
                 f'Прочитать отклик:\nhttp://127.0.0.1:8000/responses/{respond.post.id}',
-        from_email='newsportal272@gmail.com',
+        from_email='grigoryev0089@gmail.com',
         recipient_list=[respond.post.author.email, ],
     )
 
@@ -26,14 +26,13 @@ def respond_accept_send_email(response_id):
         subject=f'MMORPG Billboard: Ваш отклик принят!',
         message=f'Доброго дня, {respond.author}, Автор объявления {respond.post.title} принял Ваш отклик!\n'
                 f'Посмотреть принятые отклики:\nhttp://127.0.0.1:8000/responses',
-        from_email='newsportal272@gmail.com',
+        from_email='grigoryev0089@gmail.com',
         recipient_list=[respond.post.author.email, ],
     )
 
 
 @shared_task
 def send_mail_monday_8am():
-    # Создаем список всех объявлений, созданных за последние 7 дней (list_week_posts)
     now = timezone.now()
     list_week_posts = list(Post.objects.filter(dateCreation__gte=now - timedelta(days=7)))
     if list_week_posts:
@@ -46,6 +45,6 @@ def send_mail_monday_8am():
                 subject=f'News Portal: посты за прошедшую неделю.',
                 message=f'Доброго дня, {user.username}!\nПредлагаем Вам ознакомиться с новыми объявлениями, '
                         f'появившимися за последние 7 дней:\n{list_posts}',
-                from_email='newsportal272@gmail.com',
+                from_email='grigoryev0089@gmail.com',
                 recipient_list=[user.email, ],
             )
