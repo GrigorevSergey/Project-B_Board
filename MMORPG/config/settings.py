@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'board',
     'accounts',
 
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
