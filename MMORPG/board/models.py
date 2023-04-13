@@ -19,6 +19,7 @@ class Post(models.Model):
     dateCreation = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=256, verbose_name='Название')
     text = models.TextField()
+    image = models.ImageField(upload_to='media/', blank=True)
 
 
 class Response(models.Model):
